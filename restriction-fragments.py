@@ -60,17 +60,20 @@ parser = SeqIO.parse(options.fasta,'fasta')
 for chrom in parser:
     sys.stderr.write(chrom.name+'\n')
     hits = restr.search(chrom.seq)
-    fout.write(chrom.name+'\t'+'1'+'\t'+str(hits[0])+'\t'+str(hits[0]-1)+"\n")
+    fout.write(chrom.name+'\t'+'1'+'\t'+str(hits[0])+'\t'+str(hits[0]-1)+'\t'+str(chrom.seq[:hits[0]].upper().count('CG'))+'\n')
     for r in xrange(1,len(hits)):
         fraglen = hits[r] - hits[r-1]
         chrstart = hits[r-1]
         chrend = hits[r]
+        frag = chrom.seq[chrstart-1:chrend-1].upper() #python counts from 0 not 1 so need to -1 and upper converts sequence to uppercase
+        cpgcount = frag.count('CG')
         values = [chrom.name,
                   str(chrstart),
                   str(chrend),
-                  str(fraglen)]
+                  str(fraglen),
+                  str(cpgcount)]
         fout.write('\t'.join(values)+'\n')
-	fout.write(chrom.name+'\t'+str(hits[-1])+'\t'+str(len(chrom.seq))+'\t'+str(len(chrom.seq)-hits[-1])+"\n")
+	fout.write(chrom.name+'\t'+str(hits[-1])+'\t'+str(len(chrom.seq))+'\t'+str(len(chrom.seq)-hits[-1])+'\t'+str(chrom.seq[hits[-1]-1:].upper().count('CG'))+'\n')
     fout.flush()
 if options.bed is not None:
     fout.close()
