@@ -9,10 +9,10 @@ Makes a BED file of the restriction fragments from a virtual digest with a speci
 Example usage:
     
     # Get BED file of DpnI sites in dm3.fa
-    python restriction-fragments-rdbiomod.py --fasta dm3.fa --enzyme DpnI --bed DpnI-sites.bed
+    python restriction-fragments.py --fasta hg19.fa --enzyme MspI --bed HG19-MspI-virtualdigest.bed
 
     # can pipe to BedTools to get, e.g, sites in genes::
-    python restriction-fragments-rdbiomod.py --fasta myfasta.fa --enzyme DpnI | intersectBed -a stdin -b genes.bed > DpnI-in-genes.bed
+    python restriction-fragments.py --fasta myfasta.fa --enzyme MspI | intersectBed -a stdin -b genes.bed > MspI-in-genes.bed
 
 
 Modified 29th April 2014 by Piali Mukherjee from restriction-finder.py created on 13 Aug 2010 by Ryan Dale"""
