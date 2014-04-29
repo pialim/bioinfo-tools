@@ -4,7 +4,7 @@
 
 usage ="""
 
-Makes a BED file of the restriction fragments from a virtual digest with a specified restriction enzyme.
+Makes a BED file of the restriction fragments from a virtual digest with a specified restriction enzyme. (Also appends restriction fragment length and CpG count respectively after each fragment)
 
 Example usage:
     
@@ -15,7 +15,7 @@ Example usage:
     python restriction-fragments-rdbiomod.py --fasta myfasta.fa --enzyme DpnI | intersectBed -a stdin -b genes.bed > DpnI-in-genes.bed
 
 
-Modified 24th April 2004 by Piali Mukherjee from restriction-finder.py created on 13 Aug 2010 by Ryan Dale"""
+Modified 29th April 2014 by Piali Mukherjee from restriction-finder.py created on 13 Aug 2010 by Ryan Dale"""
 try:
     from Bio import SeqIO
     from Bio import Restriction
